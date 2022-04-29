@@ -1,0 +1,54 @@
+terraform init -migrate-state.sqlstate
+terraform plan -var-file="qa.tfvars" -state="qa.tfstate"
+terraform plan -var-file="prod.tfvars" -state="prod.tfstate"
+******************************************************************
+
+terraform plan -var-file="prod.tfvars" 
+az login
+az account set -s 3167fd4b-bd5a-4ea0-9664-15a5af1656c4
+az account set -s 3167fd4b-bd5a-4ea0-9664-15a5af1656c4
+az ad sp create-for-rbac -n terraform
+az ad sp list
+ az ad sp credential list --id
+****
+az account set -s 008a13da-6a54-4341-87b0-88fb7d5a7451
+az account set -s 008a13da-6a54-4341-87b0-88fb7d5a7451
+az ad sp create-for-rbac -n terraform
+az ad sp list
+ az ad sp credential list --id
+az ad sp credential list
+********************************************
+
+Terraform plan --var-file=DEV.tfvars -out DEV.tfplan
+Terraform apply DEV.tfplan 
+
+Terraform plan --var-file=STAGE.tfvars -out STAGE.tfplan
+Terraform apply STAGE.tfplan 
+
+Terraform plan --var-file=PROD.tfvars -out PROD.tfplan
+Terraform apply PROD.tfplan 
+
+
+
+**************************
+terraform plan -var-file="qa.tfvars" -state="qa.tfstate"
+terraform apply -var-file="qa.tfvars" -state="qa.tfstate" -auto-approve
+terraform destroy -var-file="qa.tfvars" -state="qa.tfstate" -auto-approve
+
+terraform apply -var-file="dev.tfvars" -state="dev.tfstate" -auto-approve
+
+***********************************
+ terraform init
+terraform plan 
+terraform apply -auto-approve 
+terraform destroy -auto-approve    
+
+terraform init -var-file=dev.tfvars
+terraform validate -var-file=dev.tfvars
+terraform plan -var-file="dev.tfvars" 
+terraform apply -var-file="prod.tfvars" -auto-approve
+terraform destroy -var-file="qa.tfvars" -auto-approve
+
+Check
+terraform plan -out=tfplan -var-file=dev.tfvars
+terraform apply tfplan
